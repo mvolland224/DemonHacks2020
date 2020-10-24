@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+//AIzaSyBjUeyVDt2UWywo5CG9qxnbvKSOnMtZiec
+import React from 'react'
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { Text, StyleSheet } from "react-native";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+
+const containerStyle = {
+    width: '400px',
+    height: '400px'
+};
+
+const center = {
+    lat: 41.881832,
+    lng: -87.623177
+};
+
+function MyComponent() {
+
+    const [map, setMap] = React.useState(null)
+
+    const onLoad = React.useCallback(function callback(map) {
+        const bounds = new window.google.maps.LatLngBounds();
+        map.fitBounds(bounds);
+        setMap(map)
+    }, [])
+
+    const onUnmount = React.useCallback(function callback(map) {
+        setMap(null)
+    }, [])
+
+    return (
+        <LoadScript
+            googleMapsApiKey="AIzaSyBjUeyVDt2UWywo5CG9qxnbvKSOnMtZiec"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={10}
+                onLoad={onLoad}
+                onUnmount={onUnmount}
+            >
+                { /* Child components, such as markers, info windows, etc. */}
+                <></>
+            </GoogleMap>
+        </LoadScript>
+    )
+
 }
 
-export default App;
+
+export default React.memo(MyComponent)
