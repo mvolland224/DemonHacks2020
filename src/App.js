@@ -33,7 +33,9 @@ function App() {
   });
 
   return (
+  
     <div className="App">
+    <div>
       <h2>Face The Art {singleUser}</h2>
       <button>Use Current Location</button>
       <div {...getComboboxProps()}>
@@ -61,6 +63,35 @@ function App() {
           ))}
       </ul>
     </div>
+
+
+
+      <div>
+        <a className="AboutUs-link"
+          href= "file:///C:/Users/madla/OneDrive/Desktop/DemonHacks2020/my-app/src/AboutUs.html" // add link here to about us page
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          About Us
+        </a>
+
+        <p>
+
+        {"Don't see the art  you're looking for? Submit artwork"}
+
+        </p>
+
+        <a
+            className="Submit-link"
+            href= "https://reactjs.org/docs/cdn-links.html" // insert link to leticia's code
+            target="_blank"
+            rel= "noopener noreferrer"
+        >
+            here
+        </a>
+      </div>
+      </div>
+
   );
 }
 
