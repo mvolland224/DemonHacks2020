@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useCombobox } from "downshift";
 import { input } from "antd";
 
+
+
+
 function App() {
   const [inputItems, setInputItems] = useState([]);
   const [users, setUsers] = useState([]);
@@ -80,6 +83,7 @@ function App() {
         {"Don't see the art  you're looking for? Submit artwork"}
 
         </p>
+        <UserForm></UserForm>
 
         <a
             className="Submit-link"
@@ -92,7 +96,39 @@ function App() {
       </div>
       </div>
 
+
+
   );
-}
+
+ }
+
+
+ export function UserForm(){
+  const [picSeen, setPicSeen]= useState('')
+  const [desPic, setDesPic] = useState('')
+  const submitHandler = e =>{
+    e.preventDefault()
+    alert('Thanks for your submission.')
+  }
+
+  return(
+  <div>
+    <form onSubmit= {submitHandler}>
+    <div>
+      <label>Submit picture here.</label>
+      
+      <input value= {picSeen} onChange={e=> setPicSeen(e.target.value)}type="text" placeholder="Dropbox"></input>
+      </div>
+      <div>
+      <label>Any other information?</label>
+      
+      <textarea value= {desPic} onChange={e=> setDesPic(e.target.value)}id="info" rows="15" cols="40" placeholder="Artist name, Location, description, etc."></textarea> 
+      </div>
+      <button>Submit</button>
+    </form>
+
+  </div>
+  )
+ }
 
 export default App;
