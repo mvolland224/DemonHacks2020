@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { useCombobox } from "downshift";
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { input } from "antd";
 
 function App() {
@@ -32,6 +33,27 @@ function App() {
     },
   });
 
+    const containerStyle = {
+        width: '400px',
+        height: '400px'
+    };
+
+    const center = {
+        lat: 41.881832,
+        lng: -87.623177
+    };
+    const [map, setMap] = React.useState(null)
+
+    const onLoad = React.useCallback(function callback(map) {
+        const bounds = new window.google.maps.LatLngBounds();
+        map.fitBounds(bounds);
+        setMap(map)
+    }, [])
+
+    const onUnmount = React.useCallback(function callback(map) {
+        setMap(null)
+    }, [])
+
   return (
     <div className="App">
       <div>
@@ -52,6 +74,7 @@ function App() {
                 {...getItemProps({ item, index })}
                 onClick={() => setSingleUser(item.name)}
               >
+<<<<<<< HEAD
                 <li
                   style={
                     highlightedIndex === index ? { background: "#ede" } : {}
@@ -63,6 +86,31 @@ function App() {
             ))}
         </ul>
       </div>
+=======
+                <h4>{item.name}</h4>
+              </li>
+            </span>
+          ))}
+      </ul>
+    </div>
+
+          <LoadScript
+              googleMapsApiKey="AIzaSyBjUeyVDt2UWywo5CG9qxnbvKSOnMtZiec"
+          >
+              <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={center}
+                  zoom={10}
+                  onLoad={onLoad}
+                  onUnmount={onUnmount}
+              >
+                  { /* Child components, such as markers, info windows, etc. */}
+                  <></>
+              </GoogleMap>
+          </LoadScript>
+
+
+>>>>>>> origin/master
 
       <div>
         <a
