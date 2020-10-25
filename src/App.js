@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useCombobox } from "downshift";
 import { input } from "antd";
 
-
-
-
 function App() {
   const [inputItems, setInputItems] = useState([]);
   const [users, setUsers] = useState([]);
@@ -36,99 +33,100 @@ function App() {
   });
 
   return (
-  
     <div className="App">
-    <div>
-      <h2>Face The Art {singleUser}</h2>
-      <button>Use Current Location</button>
-      <div {...getComboboxProps()}>
-        <input
-          {...getInputProps()}
-          placeholder="Search"
-          enterButton="Search"
-          size="large"
-        />
-      </div>
-      <ul {...getMenuProps()}>
-        {isOpen &&
-          inputItems.map((item, index) => (
-            <span
-              key={item.id}
-              {...getItemProps({ item, index })}
-              onClick={() => setSingleUser(item.name)}
-            >
-              <li
-                style={highlightedIndex === index ? { background: "#ede" } : {}}
+      <div>
+        <h2>Face The Art: {singleUser}</h2>
+        <div {...getComboboxProps()}>
+          <input
+            {...getInputProps()}
+            placeholder="Find artist..."
+            enterButton="Find artist..."
+            size="large"
+          />
+        </div>
+        <ul {...getMenuProps()}>
+          {isOpen &&
+            inputItems.map((item, index) => (
+              <span
+                key={item.id}
+                {...getItemProps({ item, index })}
+                onClick={() => setSingleUser(item.name)}
               >
-                <h4>{item.name}</h4>
-              </li>
-            </span>
-          ))}
-      </ul>
-    </div>
-
-
+                <li
+                  style={
+                    highlightedIndex === index ? { background: "#ede" } : {}
+                  }
+                >
+                  <h4>{item.name}</h4>
+                </li>
+              </span>
+            ))}
+        </ul>
+      </div>
 
       <div>
-        <a className="AboutUs-link"
-          href= "file:///C:/Users/madla/OneDrive/Desktop/DemonHacks2020/my-app/src/AboutUs.html" // add link here to about us page
+        <a
+          className="AboutUs-link"
+          href="file:///C:/Users/madla/OneDrive/Desktop/DemonHacks2020/my-app/src/AboutUs.html" // add link here to about us page
           target="_blank"
           rel="noopener noreferrer"
         >
           About Us
         </a>
 
-        <p>
-
-        {"Don't see the art  you're looking for? Submit artwork"}
-
-        </p>
+        <p>{"Don't see the art  you're looking for? Submit artwork"}</p>
         <UserForm></UserForm>
 
         <a
-            className="Submit-link"
-            href= "https://reactjs.org/docs/cdn-links.html" // insert link to leticia's code
-            target="_blank"
-            rel= "noopener noreferrer"
+          className="Submit-link"
+          href="https://reactjs.org/docs/cdn-links.html" // insert link to leticia's code
+          target="_blank"
+          rel="noopener noreferrer"
         >
-            here
+          here
         </a>
       </div>
-      </div>
-
-
-
+    </div>
   );
+}
 
- }
+export function UserForm() {
+  const [picSeen, setPicSeen] = useState("");
+  const [desPic, setDesPic] = useState("");
+  const submitHandler = (e) => {
+    e.preventDefault();
+    alert("Thanks for your submission.");
+  };
 
-
- export function UserForm(){
-  const [picSeen, setPicSeen]= useState('')
-  const [desPic, setDesPic] = useState('')
-  const submitHandler = e =>{
-    e.preventDefault()
-    alert('Thanks for your submission.')
-  }
-
-  return(
-  <div>
-    <form onSubmit= {submitHandler}>
+  return (
     <div>
-      <label>Submit picture here.</label>
-      
-      <input value= {picSeen} onChange={e=> setPicSeen(e.target.value)}type="text" placeholder="Dropbox"></input>
-      </div>
-      <div>
-      <label>Any other information?</label>
-      
-      <textarea value= {desPic} onChange={e=> setDesPic(e.target.value)}id="info" rows="15" cols="40" placeholder="Artist name, Location, description, etc."></textarea> 
-      </div>
-      <button>Submit</button>
-    </form>
+      <form onSubmit={submitHandler}>
+        <div>
+          <label>Submit picture here.</label>
 
-  </div>
-  )
- }
+          <input
+            value={picSeen}
+            onChange={(e) => setPicSeen(e.target.value)}
+            type="text"
+            placeholder="Dropbox"
+          ></input>
+        </div>
+        <div>
+          <label>Any other information?</label>
+
+          <textarea
+            value={desPic}
+            onChange={(e) => setDesPic(e.target.value)}
+            id="info"
+            rows="15"
+            cols="40"
+            placeholder="Artist name, Location, description, etc."
+          ></textarea>
+        </div>
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+}
 
 export default App;
